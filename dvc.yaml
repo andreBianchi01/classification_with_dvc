@@ -8,13 +8,3 @@ stages:
     - data_load
     outs:
     - data/raw/raw_diabetes.csv
-  features_load:
-    cmd: python src/stages/featurize.py --config=params.yaml
-    deps:
-    - data/raw/raw_diabetes.csv
-    - src/stages/features_load.py
-    params:
-    - base
-    - featurize
-    outs:
-    - data/processed/features_diabetes.csv
