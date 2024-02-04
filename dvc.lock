@@ -143,8 +143,8 @@ stages:
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: 3fe685f4113d58fc762f0cc086e1d8ca
-      size: 1107379
+      md5: 0b36a4495f638bf097cea21b008a1858
+      size: 2202739
   evaluate:
     cmd: python src/stages/evaluation.py --config=params.yaml
     deps:
@@ -154,8 +154,8 @@ stages:
       size: 1061
     - path: models/model.joblib
       hash: md5
-      md5: 3fe685f4113d58fc762f0cc086e1d8ca
-      size: 1107379
+      md5: 0b36a4495f638bf097cea21b008a1858
+      size: 2202739
     - path: src/stages/evaluation.py
       hash: md5
       md5: 9f3b845c5cf26ec5ae5669fbb949f382
@@ -168,9 +168,9 @@ stages:
     outs:
     - path: reports/confusion_matrix.png
       hash: md5
-      md5: a5245c792503afdcd3c1763a8e46d029
-      size: 25024
+      md5: f3749bf13e4372568ae908c8d3b4f1ff
+      size: 24608
     - path: reports/metrics.json
       hash: md5
-      md5: 9bc67fc0510de4dc874284b3b0832f0f
-      size: 93
+      md5: 5ba9a9a8455c2dee13f553ee335d297b
+      size: 92
