@@ -41,3 +41,34 @@ stages:
       hash: md5
       md5: db255e4de1ad37b9f0599c58f1a50b5f
       size: 20156
+  data_split:
+    cmd: python src/stages/data_split.py --config=params.yaml
+    deps:
+    - path: data/processed/features_diabetes.csv
+      hash: md5
+      md5: db255e4de1ad37b9f0599c58f1a50b5f
+      size: 20156
+    - path: src/stages/data_split.py
+      hash: md5
+      md5: 41f372fb921d3f948407275cac20ff8e
+      size: 1133
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        data_split:
+          test_db: data/processed/test_diabetes.csv
+          train_db: data/processed/train_diabetes.csv
+          test_size: 0.2
+        featurize:
+          featurize_db: data/processed/features_diabetes.csv
+          target_column: target
+    outs:
+    - path: data/processed/test_diabetes.csv
+      hash: md5
+      md5: c9ccb209c900dc3d0cea1b5eada61ff3
+      size: 1061
+    - path: data/processed/train_diabetes.csv
+      hash: md5
+      md5: 5686c4efe4f09a3e2cf3ed6c8e1b6c93
+      size: 4223
