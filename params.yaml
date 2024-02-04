@@ -1,0 +1,23 @@
+base:
+  random_state: 42
+
+data:
+  raw_db: 'data\raw\raw_diabetes.csv'
+  featurize_db: 'data\processed\features_diabetes.csv'
+  test_db: 'data\processed\test_diabetes.csv'
+  train_db: 'data\processed\train_diabetes.csv'
+  test_size: 0.2
+
+train:
+  clf_params: 
+    C_values: [0.01, 0.1, 0,001]  # Values from 0.001 to 1000 logarithmically
+    solver_options: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
+    multi_class_options: ['ovr', 'multinomial']
+    max_iter: [50, 100, 200]
+
+model:
+  name: 'models\model.joblib'
+
+reports:
+  confusion_matrix_image: 'reports\confusion_matrix.png'
+  metrics_file: 'reports\metrics.json'
