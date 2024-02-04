@@ -3,21 +3,36 @@ base:
 
 data:
   raw_db: 'data/raw/raw_diabetes.csv'
-  featurize_db: '../data/processed/features_diabetes.csv'
-  test_db: '../data/processed/test_diabetes.csv'
-  train_db: '../data/processed/train_diabetes.csv'
+  featurize_db: 'data/processed/features_diabetes.csv'
+  test_db: 'data/processed/test_diabetes.csv'
+  train_db: 'data/processed/train_diabetes.csv'
   test_size: 0.2
 
 train:
-  clf_params: 
-    C_values: [0.01, 0.1, 0,001]  # Values from 0.001 to 1000 logarithmically
-    solver_options: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
-    multi_class_options: ['ovr', 'multinomial']
-    max_iter: [50, 100, 200]
+  cv: 3
+  estimators_used: randomForest
+  estimators:
+    logreg:
+      param_grid:
+        C: [0.01, 0.1, 0,001] 
+        solver: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
+        multi_class: ['ovr', 'multinomial']
+        max_iter: [50, 100, 200]
+    svm:
+      param_grid:
+        C_values: np.logspace(-3, 3, 7)  
+        kernel: ['linear', 'poly', 'rbf', 'sigmoid']
+        degree_values: [2, 3, 4]
+    randomForest:
+      param_grid:
+        n_estimators: [50, 100, 200]
+        max_depth: [10, 20, 30]
+  
+  target_column: target
 
 model:
-  name: '../models/model.joblib'
+  path: 'models/model.joblib'
 
 reports:
-  confusion_matrix_image: '../reports/confusion_matrix.png'
-  metrics_file: '../reports/metrics.json'
+  confusion_matrix_image: 'reports/confusion_matrix.png'
+  metrics_file: 'reports/metrics.json'
