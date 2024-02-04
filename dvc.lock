@@ -101,18 +101,12 @@ stages:
             logreg:
               param_grid:
                 C:
+                - 0.001
                 - 0.01
                 - 0.1
-                - 0
-                - 1
                 solver:
-                - newton-cg
                 - lbfgs
-                - liblinear
-                - sag
-                - saga
                 multi_class:
-                - ovr
                 - multinomial
                 max_iter:
                 - 50
@@ -120,31 +114,33 @@ stages:
                 - 200
             svm:
               param_grid:
-                C_values: np.logspace(-3, 3, 7)
+                C:
+                - 0.01
+                - 0.1
+                - 0.001
                 kernel:
                 - linear
                 - poly
                 - rbf
                 - sigmoid
-                degree_values:
+                degree:
                 - 2
                 - 3
                 - 4
             randomForest:
               param_grid:
                 n_estimators:
-                - 50
-                - 100
                 - 200
+                - 500
+                - 1000
                 max_depth:
-                - 10
                 - 20
                 - 30
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: bc6a324bd366c5fc4b227d81f834046a
-      size: 530579
+      md5: a87002e70dd0c4d7bfc6bf17d8ce2f4e
+      size: 4865959
   evaluate:
     cmd: python src/stages/evaluation.py --config=params.yaml
     deps:
@@ -154,8 +150,8 @@ stages:
       size: 1061
     - path: models/model.joblib
       hash: md5
-      md5: bc6a324bd366c5fc4b227d81f834046a
-      size: 530579
+      md5: a87002e70dd0c4d7bfc6bf17d8ce2f4e
+      size: 4865959
     - path: src/stages/evaluation.py
       hash: md5
       md5: 9f3b845c5cf26ec5ae5669fbb949f382
@@ -168,9 +164,9 @@ stages:
     outs:
     - path: reports/confusion_matrix.png
       hash: md5
-      md5: 885602dfaa8abe90509d7f1f67c23226
-      size: 24496
+      md5: 51fcc19615f425079440790e11bedc66
+      size: 24965
     - path: reports/metrics.json
       hash: md5
-      md5: 5d62ac59fde7c66a7f1bbcfb3f9410c4
-      size: 92
+      md5: d6c12cc28520b8d7c788f78112b48c17
+      size: 91
