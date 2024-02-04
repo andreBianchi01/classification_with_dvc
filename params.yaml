@@ -2,10 +2,10 @@ base:
   random_state: 42
 
 data:
-  raw_db: 'data\raw\raw_diabetes.csv'
-  featurize_db: 'data\processed\features_diabetes.csv'
-  test_db: 'data\processed\test_diabetes.csv'
-  train_db: 'data\processed\train_diabetes.csv'
+  raw_db: 'data/raw/raw_diabetes.csv'
+  featurize_db: '../data/processed/features_diabetes.csv'
+  test_db: '../data/processed/test_diabetes.csv'
+  train_db: '../data/processed/train_diabetes.csv'
   test_size: 0.2
 
 train:
@@ -16,8 +16,8 @@ train:
     max_iter: [50, 100, 200]
 
 model:
-  name: 'models\model.joblib'
+  name: '../models/model.joblib'
 
 reports:
-  confusion_matrix_image: 'reports\confusion_matrix.png'
-  metrics_file: 'reports\metrics.json'
+  confusion_matrix_image: '../reports/confusion_matrix.png'
+  metrics_file: '../reports/metrics.json'
