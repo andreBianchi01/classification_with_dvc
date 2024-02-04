@@ -8,6 +8,7 @@ stages:
     - data_load
     outs:
     - data/raw/raw_diabetes.csv
+    
   features_load:
     cmd: python src/stages/features_load.py --config=params.yaml
     deps:
@@ -18,3 +19,16 @@ stages:
     - featurize
     outs:
     - data/processed/features_diabetes.csv
+
+  data_split:
+    cmd: python src/stages/data_split.py --config=params.yaml
+    deps:
+    - data/processed/featured_iris.csv
+    - src/stages/data_split.py
+    params:
+    - base
+    - data_split
+    - featurize
+    outs:
+    - data/processed/test_iris.csv
+    - data/processed/train_iris.csv
