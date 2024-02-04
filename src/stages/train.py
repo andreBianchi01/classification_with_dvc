@@ -12,13 +12,13 @@ def train_model(config_path: Text) -> None:
     with open('params.yaml') as config_file:
         config = yaml.safe_load(config_file)
 
-    train_db = pd.read_csv(config['data']['train_db'])
+    train_db = pd.read_csv(config['data_split']['train_db'])
     
     estimator_used = config['train']['estimators_used']
 
     model = train(
         df=train_db,
-        target_column=config['train']['target_column'],
+        target_column=config['featurize']['target_column'],
         estimator_name=estimator_used,
         param_grid=config['train']['estimators'][estimator_used]['param_grid'],
         cv= config['train']['cv']

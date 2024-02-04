@@ -24,9 +24,9 @@ def evaluate_model(config_path: Text) -> None:
     model_path = config['model']['path']
     model = joblib.load(model_path)
 
-    test_df = pd.read_csv(config['data']['test_db'])
+    test_df = pd.read_csv(config['data_split']['test_db'])
 
-    target_column=config['train']['target_column']
+    target_column=config['featurize']['target_column']
     y_test = test_df.loc[:, target_column].values
     X_test = test_df.drop(target_column, axis=1).values
 

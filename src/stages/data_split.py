@@ -11,7 +11,7 @@ def split_dataset(config_path: Text) -> None:
         config = yaml.safe_load(config_file)
 
     
-    features_db = pd.read_csv(config['data']['featurize_db'])
+    features_db = pd.read_csv(config['featurize']['featurize_db'])
 
     y = features_db['target']
     X = features_db.drop(['target'],axis=1)
@@ -19,12 +19,12 @@ def split_dataset(config_path: Text) -> None:
     train_db, test_db, y_train, y_test = train_test_split(
         y,
         X, 
-        test_size=config['data']['test_size'], 
+        test_size=config['data_split']['test_size'], 
         random_state=config['base']['random_state']
     )
 
-    train_db.to_csv(config['data']['train_db'])
-    test_db.to_csv(config['data']['test_db'])
+    train_db.to_csv(config['data_split']['train_db'])
+    test_db.to_csv(config['data_split']['test_db'])
 
     print("data_split completato!")
 

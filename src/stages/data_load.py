@@ -10,7 +10,7 @@ def data_load(config_path: Text) -> None:
 
     diabetes = pd.read_csv('https://github.com/YBIFoundation/Dataset/raw/main/Diabetes.csv')
     diabetes.rename(columns={'diabetes':'target'}, inplace=True)
-    diabetes.to_csv(config['data']['raw_db'], index=False)
+    diabetes.to_csv(config['data_load']['raw_db'], index=False)
 
     print('data_load Completato!')
     

@@ -1,0 +1,43 @@
+schema: '2.0'
+stages:
+  data_load:
+    cmd: python src/stages/data_load.py --config=params.yaml
+    deps:
+    - path: src/stages/data_load.py
+      hash: md5
+      md5: 688f9c56f4a9d950867dfa6dc6606917
+      size: 835
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        data_load:
+          raw_db: data/raw/raw_diabetes.csv
+    outs:
+    - path: data/raw/raw_diabetes.csv
+      hash: md5
+      md5: 4f95456d34e5664e135092a18e1a5107
+      size: 25496
+  features_load:
+    cmd: python src/stages/features_load.py --config=params.yaml
+    deps:
+    - path: data/raw/raw_diabetes.csv
+      hash: md5
+      md5: 4f95456d34e5664e135092a18e1a5107
+      size: 25496
+    - path: src/stages/features_load.py
+      hash: md5
+      md5: ee3b9100290a95a4218eceade1e4abb7
+      size: 884
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        featurize:
+          featurize_db: data/processed/features_diabetes.csv
+          target_column: target
+    outs:
+    - path: data/processed/features_diabetes.csv
+      hash: md5
+      md5: db255e4de1ad37b9f0599c58f1a50b5f
+      size: 20156

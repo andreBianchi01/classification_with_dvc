@@ -9,7 +9,7 @@ stages:
     outs:
     - data/raw/raw_diabetes.csv
   features_load:
-    cmd: python src/stages/featurize.py --config=params.yaml
+    cmd: python src/stages/features_load.py --config=params.yaml
     deps:
     - data/raw/raw_diabetes.csv
     - src/stages/features_load.py
