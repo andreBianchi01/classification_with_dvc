@@ -23,7 +23,7 @@ stages:
   data_split:
     cmd: python src/stages/data_split.py --config=params.yaml
     deps:
-    - data/processed/featured_diabetes.csv
+    - data/processed/features_diabetes.csv
     - src/stages/data_split.py
     params:
     - base
@@ -32,3 +32,28 @@ stages:
     outs:
     - data/processed/test_diabetes.csv
     - data/processed/train_diabetes.csv
+
+  train:
+    cmd: python src/stages/train.py --config=params.yaml
+    deps:
+    - data/processed/train_diabetes.csv
+    - src/stages/train.py
+    params:
+    - model
+    - train
+    - featurize
+    - data_split
+    outs:
+    - models/model.joblib
+
+  evaluate:
+    cmd: python src/stages/evaluation.py --config=params.yaml
+    deps:
+    - data/processed/test_diabetes.csv
+    - src/stages/evaluation.py
+    - models/model.joblib
+    params:
+    - featurize
+    outs:
+    - reports/metrics.json
+    - reports/confusion_matrix.png

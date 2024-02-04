@@ -4,11 +4,11 @@ import pandas as pd
 import argparse
 import joblib
 from src.train.train import train
+import sys
 
 
 def train_model(config_path: Text) -> None:
 
-    
     with open('params.yaml') as config_file:
         config = yaml.safe_load(config_file)
 
