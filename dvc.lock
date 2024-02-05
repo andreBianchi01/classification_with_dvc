@@ -97,11 +97,10 @@ stages:
               param_grid:
                 learning_rate:
                 - 0.01
-                - 0.001
                 max_depth:
                 - 3
                 - 5
-                - 8
+                - 7
                 n_estimators:
                 - 1000
                 - 1500
@@ -147,8 +146,8 @@ stages:
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: d9e810e6fd796aaabfd15de597bc44ca
-      size: 2122830
+      md5: ab1e2f4d6996c6cd855ba0177b102b78
+      size: 2121786
   evaluate:
     cmd: python src/stages/evaluation.py --config=params.yaml
     deps:
@@ -158,8 +157,8 @@ stages:
       size: 1061
     - path: models/model.joblib
       hash: md5
-      md5: d9e810e6fd796aaabfd15de597bc44ca
-      size: 2122830
+      md5: ab1e2f4d6996c6cd855ba0177b102b78
+      size: 2121786
     - path: src/stages/evaluation.py
       hash: md5
       md5: b60b8f6df2a25d17a48617e115d645f4
