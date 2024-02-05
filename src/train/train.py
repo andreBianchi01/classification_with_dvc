@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble  import RandomForestClassifier
+from xgboost import XGBClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import f1_score, make_scorer
 from typing import Dict, Text
@@ -24,7 +25,8 @@ def get_supported_estimator() -> Dict:
     return {
         'logreg': LogisticRegression,
         'svm': SVC,
-        'randomForest': RandomForestClassifier
+        'randomForest': RandomForestClassifier,
+        'xgbc': XGBClassifier
     }
 
 

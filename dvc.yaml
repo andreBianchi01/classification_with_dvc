@@ -50,15 +50,18 @@ stages:
     cmd: python src/stages/evaluation.py --config=params.yaml
     deps:
     - data/processed/test_diabetes.csv
-    - src/stages/evaluation.py
     - models/model.joblib
+    - src/stages/evaluation.py
     params:
-    - featurize.target_column
     - data_split.test_db
+    - featurize.target_column
     - reports
-    outs:
+    plots:
     - reports/confusion_matrix.png
-    - reports/confusion_matrix_data.csv
+    - reports/confusion_matrix_data.csv:
+        template: confusion
+        x: predicted
+        y: y_true
     metrics:
     - reports/metrics.json:
         cache: false
