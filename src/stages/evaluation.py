@@ -10,6 +10,19 @@ import yaml
 
 from src.report.visualization import plot_confusion_matrix
 
+def convert_to_labels(indexes, labels):
+    result = []
+    for i in indexes:
+        result.append(labels[i])
+    return result
+
+
+def write_confusion_matrix_data(y_true, predicted, labels, filename):
+    assert len(predicted) == len(y_true)
+    predicted_labels = convert_to_labels(predicted, labels)
+    true_labels = convert_to_labels(y_true, labels)
+    cf = pd.DataFrame(list(zip(true_labels, predicted_labels)), columns=["y_true", "predicted"])
+    cf.to_csv(filename, index=False)
 
 
 def evaluate_model(config_path: Text) -> None:
@@ -44,7 +57,7 @@ def evaluate_model(config_path: Text) -> None:
         'predicted': y_pred
     }
 
-    # save f1 metrics file
+    labels = ['not_diabetes', 'diabetes']
 
     metrics_path = config['reports']['metrics_file']
 
@@ -57,10 +70,13 @@ def evaluate_model(config_path: Text) -> None:
 
     # save confusion_matrix.png
     plt = plot_confusion_matrix(cm=report['cm'],
-                                target_names=['not_diabetes', 'diabetes'],
+                                target_names=labels,
                                 normalize=False)
     confusion_matrix_png_path = config['reports']['confusion_matrix_image']
     plt.savefig(confusion_matrix_png_path)
+
+    confusion_matrix_data_path = config['reports']['confusion_matrix_data']
+    write_confusion_matrix_data(y_test, y_pred, labels=labels, filename=confusion_matrix_data_path)
 
 
 if __name__ == '__main__':

@@ -39,5 +39,6 @@ model:
   path: 'models/model.joblib'
 
 reports:
+  confusion_matrix_data: reports/confusion_matrix_data.csv
   confusion_matrix_image: 'reports/confusion_matrix.png'
   metrics_file: 'reports/metrics.json'

@@ -149,13 +149,14 @@ stages:
       size: 17671
     - path: src/stages/evaluation.py
       hash: md5
-      md5: 9f3b845c5cf26ec5ae5669fbb949f382
-      size: 2111
+      md5: b60b8f6df2a25d17a48617e115d645f4
+      size: 2785
     params:
       params.yaml:
         data_split.test_db: data/processed/test_diabetes.csv
         featurize.target_column: target
         reports:
+          confusion_matrix_data: reports/confusion_matrix_data.csv
           confusion_matrix_image: reports/confusion_matrix.png
           metrics_file: reports/metrics.json
     outs:
@@ -163,6 +164,10 @@ stages:
       hash: md5
       md5: ef12e39464d8d60bedbb3882ee0412cd
       size: 23578
+    - path: reports/confusion_matrix_data.csv
+      hash: md5
+      md5: 77bccc55385c74e9dd33da8491044544
+      size: 3956
     - path: reports/metrics.json
       hash: md5
       md5: 671b5231340b0505d3c95e62ff42eaab
