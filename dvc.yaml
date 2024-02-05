@@ -41,8 +41,8 @@ stages:
     params:
     - model
     - train
-    - featurize
-    - data_split
+    - featurize.target_column
+    - data_split.train_db
     outs:
     - models/model.joblib
 
@@ -53,7 +53,9 @@ stages:
     - src/stages/evaluation.py
     - models/model.joblib
     params:
-    - featurize
+    - featurize.target_column
+    - data_split.test_db
+    - reports
     outs:
     - reports/confusion_matrix.png
     metrics:

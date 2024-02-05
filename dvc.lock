@@ -85,13 +85,8 @@ stages:
       size: 1143
     params:
       params.yaml:
-        data_split:
-          test_db: data/processed/test_diabetes.csv
-          train_db: data/processed/train_diabetes.csv
-          test_size: 0.2
-        featurize:
-          featurize_db: data/processed/features_diabetes.csv
-          target_column: target
+        data_split.train_db: data/processed/train_diabetes.csv
+        featurize.target_column: target
         model:
           path: models/model.joblib
         train:
@@ -139,7 +134,7 @@ stages:
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: ac28afa338a0ee9be11fea02ff9a8f62
+      md5: af6292fd415370e0cb4c792436e4f337
       size: 17671
   evaluate:
     cmd: python src/stages/evaluation.py --config=params.yaml
@@ -150,7 +145,7 @@ stages:
       size: 1061
     - path: models/model.joblib
       hash: md5
-      md5: ac28afa338a0ee9be11fea02ff9a8f62
+      md5: af6292fd415370e0cb4c792436e4f337
       size: 17671
     - path: src/stages/evaluation.py
       hash: md5
@@ -158,9 +153,11 @@ stages:
       size: 2111
     params:
       params.yaml:
-        featurize:
-          featurize_db: data/processed/features_diabetes.csv
-          target_column: target
+        data_split.test_db: data/processed/test_diabetes.csv
+        featurize.target_column: target
+        reports:
+          confusion_matrix_image: reports/confusion_matrix.png
+          metrics_file: reports/metrics.json
     outs:
     - path: reports/confusion_matrix.png
       hash: md5
